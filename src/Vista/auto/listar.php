@@ -8,7 +8,11 @@
 
 <body>
     <h1>Lista de Autos </h1>
-    <?php if (!empty($autos)): ?>
+    <?php
+
+    use App\Config\Settings;
+
+    if (!empty($autos)): ?>
         <table border="1" cellpadding="5">
             <thead>
                 <tr>
@@ -27,7 +31,7 @@
                         <td><?= $auto->getModelo() ?></td>
                         <td><?= $auto->getEstado() ?></td>
                         <td>
-                            <a href="<?= BASE_URL_CTRL ?>auto/detalle_controller.php?id=<?= $auto->getId() ?>">Ver detalles</a>
+                            <a href="<?= Settings::getUrlBase()  ?>auto/detalle_controller.php?id=<?= $auto->getId() ?>">Ver detalles</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -36,7 +40,7 @@
     <?php else: ?>
         <p>No hay autos registrados.</p>
     <?php endif; ?>
-    <p><a href="<?= BASE_URL ?>index.php">Volver al menú</a></p>
+    <p><a href="<?= Settings::getUrlBase()  ?>">Volver al menú</a></p>
 </body>
 
 </html>
