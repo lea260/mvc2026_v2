@@ -10,9 +10,9 @@ class HomeController
 {
     public function index()
     {
-        echo "¡Hola! Estás en la Home.";
-        echo "Estás en el home de " . Settings::DB_HOST;
-        echo " Versión: " . Settings::getUrlBase();
+        // echo "¡Hola! Estás en la Home.";
+        // echo "Estás en el home de " . Settings::DB_HOST;
+        // echo " Versión: " . Settings::getUrlBase();
         $nombre = "juan";
         View::render('home/index', ['nombre' => $nombre]);
 

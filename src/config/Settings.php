@@ -24,6 +24,6 @@ class Settings
     public static function getUrlBase()
     {
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        return 'http://' . $host . self::URL_PREFIX . 'index.php';
+        return 'http://' . $host . self::URL_PREFIX . 'index.php/';
     }
 }

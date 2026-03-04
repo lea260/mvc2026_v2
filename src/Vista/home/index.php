@@ -1,3 +1,6 @@
+<?php
+
+use App\Config\Settings; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +13,8 @@
 <body>
     <h1>index</h1>
     <?= $nombre; ?>
+    <a href="<?= Settings::getUrlBase()  ?>autos/listar">listar Autos</a>
+    <a href="<?= Settings::getUrlBase()  ?>productos/ver/5/verde">test</a>
 </body>
 
 </html>

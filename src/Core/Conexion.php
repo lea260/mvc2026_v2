@@ -1,7 +1,8 @@
 <?php
 
-namespace Core;
+namespace App\Core;
 
+use App\Config\Settings;
 use PDO;
 use PDOException;
 
@@ -17,7 +18,7 @@ class Conexion
     public static function getPDOConnection(): PDO
     {
         // Incluir el puerto en el DSN
-        $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+        $dsn = "mysql:host=" . Settings::DB_HOST . ";port=" . Settings::DB_PORT . ";dbname=" . Settings::DB_NAME . ";charset=" . Settings::DB_CHARSET;
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -25,7 +26,7 @@ class Conexion
         ];
 
         try {
-            self::$instancia = new PDO($dsn, DB_USER, DB_PASSWORD, $options);
+            self::$instancia = new PDO($dsn, Settings::DB_USER, Settings::DB_PASSWORD, $options);
             return self::$instancia;
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), (int)$e->getCode());

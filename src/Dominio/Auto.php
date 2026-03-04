@@ -2,7 +2,10 @@
 
 namespace App\Dominio;
 
-class Auto implements   \JsonSerializable
+use App\Core\Conexion;
+use PDOException;
+
+class Auto implements \JsonSerializable
 {
     private int $id;
     private string $marca;
@@ -51,6 +54,40 @@ class Auto implements   \JsonSerializable
         }
         $this->estado = 'vendido';
         $this->version++;
+    }
+
+    private static function arrayToAuto(array $row): Auto
+    {
+        return new Auto(
+            patente: $row['patente'],
+            marca: $row['marca'],
+            modelo: $row['modelo'],
+            estado: $row['estado'],
+            version: $row['version'] ?? 0,
+            id: $row['id']
+        );
+    }
+    public static function listar(): array
+    {
+        $pdo = null;
+        $stmt = null;
+        try {
+            $pdo = Conexion::getPDOConnection();
+            $sql = "SELECT id, patente,marca,modelo,estado, version FROM auto";
+            $stmt = $pdo->query($sql);
+            while ($row = $stmt->fetch()) {
+                $auto = self::arrayToAuto($row);
+                $autos[] = $auto;
+            }
+            //retornar los autos
+            return $autos;
+        } catch (PDOException $e) {
+            error_log("Error al obtener autos: " . $e->getMessage());
+            return [];
+        } finally {
+            $stmt = null;
+            $pdo = null;
+        }
     }
     public function jsonSerialize(): array
     {

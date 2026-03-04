@@ -2,7 +2,7 @@
 
 namespace Infraestructura;
 
-use Core\Conexion;
+use App\Core\Conexion;
 use Dominio\Auto;
 use PDO;
 use PDOException;
