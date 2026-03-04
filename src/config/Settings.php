@@ -14,7 +14,7 @@ class Settings
 
     const URL_PREFIX = '/';
     // const URL_BASE = URL_BASE_PATH . 'index.php?r=';
-    const DB_HOST =  'localhost';
+    const DB_HOST =  'db';
     const DB_PORT = '3306';  // Puerto estándar de MySQL, cambia según necesidades
     const DB_NAME = 'concesionaria';
     const DB_USER = 'root';
