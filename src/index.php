@@ -1,7 +1,7 @@
 <?php
 // 1. Carga el autoloader que mapeaste en la raíz del proyecto
 // Gracias al doble montaje de Docker, 'vendor' está al mismo nivel que este archivo.
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 // 2. Capturamos lo que viene después de 'index.php'
 // $_SERVER['PATH_INFO'] es ideal cuando no hay reescritura de URL (.htaccess)

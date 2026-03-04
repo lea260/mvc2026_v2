@@ -14,17 +14,23 @@ $methodName     = !empty($parts[1]) ? $parts[1] : 'index';
 
 // 4. Construimos el nombre completo de la clase (Namespace + Nombre)
 // Asumiendo que tus controladores están en la carpeta 'src/controller'
-$fullClass = "App\\Controller\\" . $controllerName . "Controller";
 
+
+
+// 4. Parámetros: Extraemos todo lo que queda en $parts a partir del índice 2
+$params = array_slice($parts, 2);
+
+// 5. Construimos el nombre completo de la clase
+$fullClass = "App\\Controller\\" . $controllerName . "Controller";
 try {
     if (class_exists($fullClass)) {
         $controller = new $fullClass();
 
         if (method_exists($controller, $methodName)) {
-            // Llamamos al método (ej: UsuarioController->perfil())
-            $controller->$methodName();
+            // USAMOS call_user_func_array para pasar los parámetros dinámicamente
+            call_user_func_array([$controller, $methodName], $params);
         } else {
-            throw new Exception("Método '$methodName' no encontrado en $fullClass");
+            throw new Exception("Método '$methodName' no encontrado.");
         }
     } else {
         throw new Exception("El controlador '$fullClass' no existe");

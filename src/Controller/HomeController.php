@@ -8,5 +8,7 @@ class HomeController
     public function index()
     {
         echo "¡Hola! Estás en la Home.";
+        //cargo la vista
+        // http: //localhost:8080/index.php/productos/ver/5/verde
     }
 }
