@@ -7,22 +7,39 @@ use PDOException;
 
 class Auto implements \JsonSerializable
 {
-    private int $id;
-    private string $marca;
-    private string $modelo;
-    private string $patente;
-    private string $estado;
-    private int $version;
+    //constructor property promotion
+    public function __construct(
+        private string $patente,
+        private string $marca,
+        private string $modelo,
+        private string $estado = 'disponible',
+        private int $version = 0,
+        private ?int $id = 0
+    ) {}
 
-    public function __construct(string $patente, string $marca, string $modelo, string $estado = 'disponible', int $version = 0, ?int $id = null)
-    {
-        $this->patente = $patente;
-        $this->modelo = $modelo;
-        $this->estado = $estado;
-        $this->version = $version;
-        $this->id = $id ?? 0;
-        $this->marca = $marca;
+    /**
+     * Factory Method para crear una instancia nueva de Auto.
+     * Útil para cuando recibes datos de un formulario o request.
+     */
+    public static function crear(
+        string $patente,
+        string $marca,
+        string $modelo,
+    ): self {
+        $instancia = new self(
+            patente: $patente,
+            marca: $marca,
+            modelo: $modelo,
+            estado: "disponible",
+            version: 0,    // Un auto nuevo empieza en versión 0
+            id: null       // El ID suele ser nulo hasta que se persiste en la DB
+        );
+        $instancia->validar();
+        return $instancia;
     }
+
+
+
 
     public function reservar(): void
     {
@@ -56,7 +73,7 @@ class Auto implements \JsonSerializable
         $this->version++;
     }
 
-    private static function arrayToAuto(array $row): Auto
+    public static function desdeArreglo(array $row): Auto
     {
         return new Auto(
             patente: $row['patente'],
@@ -67,28 +84,7 @@ class Auto implements \JsonSerializable
             id: $row['id']
         );
     }
-    public static function listar(): array
-    {
-        $pdo = null;
-        $stmt = null;
-        try {
-            $pdo = Conexion::getPDOConnection();
-            $sql = "SELECT id, patente,marca,modelo,estado, version FROM auto";
-            $stmt = $pdo->query($sql);
-            while ($row = $stmt->fetch()) {
-                $auto = self::arrayToAuto($row);
-                $autos[] = $auto;
-            }
-            //retornar los autos
-            return $autos;
-        } catch (PDOException $e) {
-            error_log("Error al obtener autos: " . $e->getMessage());
-            return [];
-        } finally {
-            $stmt = null;
-            $pdo = null;
-        }
-    }
+
     public function jsonSerialize(): array
     {
         return [

@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+use App\Aplicacion\ListarAutos;
 use App\Core\View;
-use App\Dominio\Auto;
 use Exception;
 
 class AutosController
@@ -15,7 +15,8 @@ class AutosController
 
         $autos = [];
         try {
-            $autos = Auto::listar();
+            $casoUso = new ListarAutos();
+            $autos = $casoUso->ejecutar();
             View::render('autos/listar', ['autos' => $autos]);
         } catch (Exception $e) {
             View::render('mensaje/comun.php', [
