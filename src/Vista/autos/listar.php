@@ -31,7 +31,7 @@
                         <td><?= $auto->getModelo() ?></td>
                         <td><?= $auto->getEstado() ?></td>
                         <td>
-                            <a href="<?= Settings::getUrlBase()  ?>auto/detalle_controller.php?id=<?= $auto->getId() ?>">Ver detalles</a>
+                            <a href="<?= Settings::getUrlBase()  ?>autos/editar/<?= $auto->getId() ?>">Ver detalles</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

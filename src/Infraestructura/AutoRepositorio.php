@@ -73,7 +73,7 @@ class AutoRepositorio
         ]);
     }
 
-    private function actualizar(Auto $auto): bool
+    public function actualizar(Auto $auto): bool
     {
         // Implementación de Optimistic Locking usando la columna 'version'
         $sql = "UPDATE auto SET 

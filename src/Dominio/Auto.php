@@ -121,4 +121,13 @@ class Auto implements \JsonSerializable
     {
         return $this->version;
     }
+
+    public function setModelo(string $modelo)
+    {
+        $this->modelo = $modelo;
+    }
+    public function setMarca(string $marca)
+    {
+        $this->marca = $marca; 
+    }
 }

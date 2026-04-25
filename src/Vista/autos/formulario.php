@@ -1,3 +1,7 @@
+<?php
+
+use App\Config\Settings;
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,7 +14,7 @@
 <body>
     <h2>Registrar Nuevo Auto</h2>
 
-    <form action="<?= BASE_URL_CTRL ?>auto/guardar_controller.php" method="POST">
+    <form action="<?= Settings::getUrlBase() ?>autos/guardar_controller.php" method="POST">
         <div>
             <label for="patente">Patente:</label>
             <input
