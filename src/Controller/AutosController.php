@@ -87,10 +87,15 @@ class AutosController
             // En actualización a veces es mejor reconstruir o pasar el ID 
             // y los datos al caso de uso para que él busque y modifique.
             $casoUso = new ActualizarAuto();
-            
+            $id = (int)$_POST['id'];
+            $marca = $_POST['marca'];
+            $modelo = $_POST['modelo'];
 
-            if ($casoUso->ejecutar($_POST)) {
-                header('Location: /autos');
+
+
+            if ($casoUso->ejecutar($id, $marca, $modelo)) {
+                header('Location: /index.php/autos/listar');
+                exit;
             }
         } catch (Exception $e) {
             $this->mostrarError("Error al actualizar", $e->getMessage());

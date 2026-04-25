@@ -16,12 +16,13 @@ class ActualizarAuto
     /**
      * Recibe los datos del formulario de edición.
      */
-    public function ejecutar(array $datos): bool
+    public function ejecutar(int $id, string $marca, string $modelo): bool
     {
         try {
             // 1. Buscamos el auto existente en la base de datos
-            $auto = $this->repositorio->buscarPorId((int)$datos['id']);
-
+            $auto = $this->repositorio->buscarPorId($id);
+            $auto->setMarca($marca);
+            $auto->setModelo($modelo);
             if (!$auto) {
                 throw new \Exception("No se encontró el auto para actualizar.");
             }
@@ -29,7 +30,7 @@ class ActualizarAuto
             // 2. Modificamos los datos de la entidad 
             // (Aquí podrías tener métodos en la entidad Auto como cambiarMarca, etc.)
             // Por ahora, usamos un método imaginario que actualice los campos:
-            
+
 
             // 3. Persistimos los cambios a través del repositorio
             return $this->repositorio->actualizar($auto);
