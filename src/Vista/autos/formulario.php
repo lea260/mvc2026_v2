@@ -69,7 +69,7 @@ $action = $isEdit ? "autos/actualizar" : "autos/crear";
             </button>
 
             <?php if ($isEdit): ?>
-                <a href="<?= Settings::getUrlBase() ?>autos">Cancelar</a>
+                <a href="<?= Settings::getUrlBase() ?>">Cancelar</a>
             <?php endif; ?>
         </div>
     </form>

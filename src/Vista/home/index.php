@@ -15,6 +15,7 @@ use App\Config\Settings; ?>
     <?= $nombre; ?>
     <a href="<?= Settings::getUrlBase()  ?>autos/listar">listar Autos</a>
     <a href="<?= Settings::getUrlBase()  ?>productos/ver/5/verde">test</a>
+    <a href="<?= Settings::getUrlBase()  ?>autos/nuevo">nuevo</a>
 </body>
 
 </html>
